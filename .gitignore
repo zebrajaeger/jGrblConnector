@@ -1,12 +1,50 @@
+# Common stuff
+temp/
+tmp/
+log/
+*.log
+*.tmp
+*.bak
+*.swp
+*.kate-swp
+*~
+
+# Java Stuff
 *.class
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
 *.jar
 *.war
 *.ear
+hs_err_pid*
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+*.ids
+
+# JRebel
+rebel.xml
+rebel-remote.xml
+
+# Build Tools
+bin/
+out/
+target/
+classes/
+
+# OS X
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
