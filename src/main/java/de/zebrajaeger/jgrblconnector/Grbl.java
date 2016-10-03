@@ -33,6 +33,10 @@ public class Grbl extends GrblListenerAdapter {
         core.addListener(l);
     }
 
+    public void removeListener(GrblListener l) {
+        core.removeListener(l);
+    }
+
     public GrblResponse moveXRelativeBlocking(float x) throws InterruptedException, IOException {
         return sendCommandBlocking("G91 X" + floatToString(x));
     }

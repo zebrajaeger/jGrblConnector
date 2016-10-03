@@ -56,6 +56,21 @@ public class GrblCore implements SerialReceiveListener {
         }
     }
 
+    public void removeListener(GrblListener l){
+        if (l instanceof GrblStartListener) {
+            removeStartListener((GrblStartListener) l);
+        }
+        if (l instanceof GrblStatusListener) {
+            removeStatusListener((GrblStatusListener) l);
+        }
+        if (l instanceof GrblAlarmListener) {
+            removeAlarmListener((GrblAlarmListener) l);
+        }
+        if (l instanceof GrblInfoListener) {
+            removeInfoListener((GrblInfoListener) l);
+        }
+    }
+
     public void addStartListener(GrblStartListener l) {
         startListeners.add(l);
     }
@@ -70,6 +85,22 @@ public class GrblCore implements SerialReceiveListener {
 
     public void addInfoListener(GrblInfoListener l) {
         infoListeners.add(l);
+    }
+
+    public void removeStartListener(GrblStartListener l) {
+        startListeners.remove(l);
+    }
+
+    public void removeStatusListener(GrblStatusListener l) {
+        statusListeners.remove(l);
+    }
+
+    public void removeAlarmListener(GrblAlarmListener l) {
+        alarmListeners.remove(l);
+    }
+
+    public void removeInfoListener(GrblInfoListener l) {
+        infoListeners.remove(l);
     }
 
     /**
