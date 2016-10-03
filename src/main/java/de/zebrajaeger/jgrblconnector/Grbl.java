@@ -46,7 +46,7 @@ public class Grbl extends GrblListenerAdapter {
   }
 
   public GrblResponse moveXYRelativeBlocking(float x, float y) throws InterruptedException, IOException {
-    System.out.println("## " + floatToString(x));
+    //System.out.println("## " + floatToString(x));
     return sendCommandBlocking("G91 X" + floatToString(x) + " Y" + floatToString(y));
   }
 

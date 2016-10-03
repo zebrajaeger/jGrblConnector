@@ -14,6 +14,9 @@ import de.zebrajaeger.jgrblconnector.event.GrblStatusListener;
 import de.zebrajaeger.jgrblconnector.serial.SerialConnection;
 import de.zebrajaeger.jgrblconnector.serial.SerialReceiveListener;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,9 @@ import java.util.List;
 public class GrblCore implements SerialReceiveListener {
   public static final int EXPECTED_MAX_LINE_LENGTH = 100;
   public static final int EXPECTED_MAX_STATUS_LENGTH = 80;
+
+  private static final Logger LOG = LoggerFactory.getLogger(GrblCore.class);
+
   private SerialConnection con;
   private ReceiveStatus status = ReceiveStatus.STREAM;
   private StringBuffer statusBuffer = null;
@@ -108,11 +114,11 @@ public class GrblCore implements SerialReceiveListener {
    * timeout
    */
   public void sendCommand(GrblCommand cmd) throws InterruptedException, IOException {
-
     synchronized (this) {
       while (currentCommand != null) {
         wait();
       }
+      LOG.debug("SendCommand: " + cmd.getCommand());
       currentCommand = cmd;
 
       // send command

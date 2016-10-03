@@ -18,27 +18,6 @@ public class GrblStatusEvent {
     this.wpos = wpos;
   }
 
-  public Status getStatus() {
-    return status;
-  }
-
-  public Position getMpos() {
-    return mpos;
-  }
-
-  public Position getWpos() {
-    return wpos;
-  }
-
-  @Override
-  public String toString() {
-    return "GrblStatusEvent{"
-        + "event=" + status
-        + ", mpos=" + mpos
-        + ", wpos=" + wpos
-        + '}';
-  }
-
   /**
    * Example: '<Idle,MPos:0.000,0.000,0.000,WPos:0.000,0.000,0.000>' or 'Idle,MPos:0.000,0.000,0.000,WPos:0.000,0.000,0.000'
    */
@@ -71,6 +50,56 @@ public class GrblStatusEvent {
       return new GrblStatusEvent(status, mpos, wpos);
     }
     return null;
+  }
+
+  public Status getStatus() {
+    return status;
+  }
+
+  public Position getMpos() {
+    return mpos;
+  }
+
+  public Position getWpos() {
+    return wpos;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    GrblStatusEvent that = (GrblStatusEvent) o;
+
+    if (status != that.status) {
+      return false;
+    }
+    if (mpos != null ? !mpos.equals(that.mpos) : that.mpos != null) {
+      return false;
+    }
+    return wpos != null ? wpos.equals(that.wpos) : that.wpos == null;
+
+  }
+
+  @Override
+  public int hashCode() {
+    int result = status != null ? status.hashCode() : 0;
+    result = 31 * result + (mpos != null ? mpos.hashCode() : 0);
+    result = 31 * result + (wpos != null ? wpos.hashCode() : 0);
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "GrblStatusEvent{"
+        + "event=" + status
+        + ", mpos=" + mpos
+        + ", wpos=" + wpos
+        + '}';
   }
 
   public enum Status {
