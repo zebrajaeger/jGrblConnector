@@ -23,10 +23,10 @@ public class GrblResponse {
 
   @Override
   public String toString() {
-    return "GrblResponse{" +
-        "event=" + status +
-        ", message='" + message + '\'' +
-        '}';
+    return "GrblResponse{"
+        + "event=" + status
+        + ", message='" + message + '\''
+        + '}';
   }
 
   public static GrblResponse of(String line) {
@@ -45,9 +45,7 @@ public class GrblResponse {
     return new GrblResponse(status, message);
   }
 
-
   public enum Status {
     OK, ERROR, UNKNOWN;
   }
-
 }

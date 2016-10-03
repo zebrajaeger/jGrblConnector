@@ -9,7 +9,6 @@ public class GrblCommand {
   private Long queueTimeout;
   private Long responseTimeout;
 
-
   private GrblCommand(String command, GrblCallback callback, Long queueTimeout, Long responseTimeout) {
     this.command = command;
     this.callback = callback;
@@ -47,18 +46,18 @@ public class GrblCommand {
       this.command = command;
     }
 
-    public Builder callback(GrblCallback callback) {
-      this.callback = callback;
+    public Builder callback(GrblCallback withCallback) {
+      this.callback = withCallback;
       return this;
     }
 
-    public Builder queueTimeout(Long queueTimeout) {
-      this.queueTimeout = queueTimeout;
+    public Builder queueTimeout(Long withQueueTimeout) {
+      this.queueTimeout = withQueueTimeout;
       return this;
     }
 
-    public Builder responseTimeout(Long responseTimeout) {
-      this.responseTimeout = responseTimeout;
+    public Builder responseTimeout(Long withResponseTimeout) {
+      this.responseTimeout = withResponseTimeout;
       return this;
     }
 
@@ -69,11 +68,11 @@ public class GrblCommand {
 
   @Override
   public String toString() {
-    return "GrblCommand{" +
-        "responseTimeout=" + responseTimeout +
-        ", queueTimeout=" + queueTimeout +
-        ", callback=" + callback +
-        ", command='" + command + '\'' +
-        '}';
+    return "GrblCommand{"
+        + "responseTimeout=" + responseTimeout
+        + ", queueTimeout=" + queueTimeout
+        + ", callback=" + callback
+        + ", command='" + command + '\''
+        + '}';
   }
 }

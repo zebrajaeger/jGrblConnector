@@ -16,9 +16,9 @@ public class GrblInfoEvent {
 
   @Override
   public String toString() {
-    return "GrblInfoEvent{" +
-        "info='" + info + '\'' +
-        '}';
+    return "GrblInfoEvent{"
+        + "info='" + info + '\''
+        + '}';
   }
 
   /**

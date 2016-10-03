@@ -18,9 +18,9 @@ public class GrblStartEvent {
   @Override
   public String
   toString() {
-    return "GrblStartEvent{" +
-        "start='" + version + '\'' +
-        '}';
+    return "GrblStartEvent{"
+        + "start='" + version + '\''
+        + '}';
   }
 
   public static GrblStartEvent of(String start) {

@@ -32,11 +32,11 @@ public class GrblStatusEvent {
 
   @Override
   public String toString() {
-    return "GrblStatusEvent{" +
-        "event=" + status +
-        ", mpos=" + mpos +
-        ", wpos=" + wpos +
-        '}';
+    return "GrblStatusEvent{"
+        + "event=" + status
+        + ", mpos=" + mpos
+        + ", wpos=" + wpos
+        + '}';
   }
 
   /**
@@ -49,7 +49,7 @@ public class GrblStatusEvent {
       x = x.substring(1, x.length() - 1);
     }
 
-    // TODO depends of setting, the amount of parts can change
+    // TODO depends on setting, the amount of parts can change
     String[] parts = x.split(",");
     if (parts.length == 7) {
 

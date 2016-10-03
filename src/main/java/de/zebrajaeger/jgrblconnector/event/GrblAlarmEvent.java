@@ -17,9 +17,9 @@ public class GrblAlarmEvent {
 
   @Override
   public String toString() {
-    return "GrblAlarmEvent{" +
-        "message='" + message + '\'' +
-        '}';
+    return "GrblAlarmEvent{"
+        + "message='" + message + '\''
+        + '}';
   }
 
   public static GrblAlarmEvent of(String message) {

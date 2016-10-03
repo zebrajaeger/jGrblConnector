@@ -28,11 +28,11 @@ public class Position {
 
   @Override
   public String toString() {
-    return "Position{" +
-        "x=" + x +
-        ", y=" + y +
-        ", z=" + z +
-        '}';
+    return "Position{"
+        + "x=" + x
+        + ", y=" + y
+        + ", z=" + z
+        + '}';
   }
 
   public static Position of(String sx, String sy, String sz) {

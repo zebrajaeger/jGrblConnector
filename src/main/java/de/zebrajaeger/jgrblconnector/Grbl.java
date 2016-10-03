@@ -113,8 +113,8 @@ public class Grbl extends GrblListenerAdapter {
     private GrblResponse response;
 
     @Override
-    public void grblResponse(GrblResponse response) {
-      this.response = response;
+    public void grblResponse(GrblResponse r) {
+      this.response = r;
 
       synchronized (this) {
         this.notifyAll();
