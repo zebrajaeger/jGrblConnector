@@ -4,11 +4,7 @@ package de.zebrajaeger.jgrblconnector.gear;
  * @author Lars Brandt on 15.10.2016.
  */
 public class NoGear implements Gear {
-  private static final Gear instance = new NoGear();
-
-  public static Gear instance() {
-    return instance;
-  }
+  public static final Gear INSTANCE = new NoGear();
 
   @Override
   public float motorSideToDriveSide(float motorAngle) {

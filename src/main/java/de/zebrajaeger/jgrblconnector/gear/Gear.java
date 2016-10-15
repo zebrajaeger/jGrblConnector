@@ -5,5 +5,6 @@ package de.zebrajaeger.jgrblconnector.gear;
  */
 public interface Gear {
   float motorSideToDriveSide(float motorAngle);
+
   float driveSideToMotorSide(float driveAngle);
 }

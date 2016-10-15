@@ -31,7 +31,7 @@ public class Grbl extends GrblListenerAdapter {
   @Nullable
   private GrblStatusEvent lastStatus;
   @Nonnull
-  private Gear gear = NoGear.instance();
+  private Gear gear = NoGear.INSTANCE;
 
   public Grbl(SerialConnection con, long timeout) {
     this.core = new GrblCore(con);
