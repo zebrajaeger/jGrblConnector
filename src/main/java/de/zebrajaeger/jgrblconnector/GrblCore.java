@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by lars on 03.09.2016.
+ * @author Lars Brandt on 03.09.2016.
  */
 public class GrblCore implements SerialReceiveListener {
   public static final int EXPECTED_MAX_LINE_LENGTH = 100;

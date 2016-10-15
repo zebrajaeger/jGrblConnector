@@ -6,22 +6,32 @@ import de.zebrajaeger.jgrblconnector.command.GrblResponse;
 import de.zebrajaeger.jgrblconnector.event.GrblListener;
 import de.zebrajaeger.jgrblconnector.event.GrblListenerAdapter;
 import de.zebrajaeger.jgrblconnector.event.GrblStatusEvent;
+import de.zebrajaeger.jgrblconnector.gear.Gear;
+import de.zebrajaeger.jgrblconnector.gear.NoGear;
 import de.zebrajaeger.jgrblconnector.serial.SerialConnection;
 
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
- * Created by lars on 04.09.2016.
+ * @author Lars Brandt on 04.09.2016.
  */
 public class Grbl extends GrblListenerAdapter {
   public static final NumberFormat NUMBER_FORMAT = NumberFormat.getNumberInstance(Locale.ENGLISH);
 
   private long timeout;
+  @Nonnull
   private GrblCore core;
+  @Nonnull
   private Object statusLock = new Object();
+  @Nullable
   private GrblStatusEvent lastStatus;
+  @Nonnull
+  private Gear gear = NoGear.instance();
 
   public Grbl(SerialConnection con, long timeout) {
     this.core = new GrblCore(con);
@@ -37,17 +47,28 @@ public class Grbl extends GrblListenerAdapter {
     core.removeListener(l);
   }
 
+  @Nonnull
+  public Gear getGear() {
+    return gear;
+  }
+
+  public void setGear(@Nonnull Gear gear) {
+    this.gear = gear;
+  }
+
   public GrblResponse moveXRelativeBlocking(float x) throws InterruptedException, IOException {
-    return sendCommandBlocking("G91 X" + floatToString(x));
+    return sendCommandBlocking("G91 X" + floatToString(gear.driveSideToMotorSide(x)));
   }
 
   public GrblResponse moveYRelativeBlocking(float y) throws InterruptedException, IOException {
-    return sendCommandBlocking("G91 Y" + floatToString(y));
+    return sendCommandBlocking("G91 Y" + floatToString(gear.driveSideToMotorSide(y)));
   }
 
   public GrblResponse moveXYRelativeBlocking(float x, float y) throws InterruptedException, IOException {
     //System.out.println("## " + floatToString(x));
-    return sendCommandBlocking("G91 X" + floatToString(x) + " Y" + floatToString(y));
+    return sendCommandBlocking("G91 "
+        + " X" + floatToString(gear.driveSideToMotorSide(x))
+        + " Y" + floatToString(gear.driveSideToMotorSide(y)));
   }
 
   /**
@@ -124,6 +145,5 @@ public class Grbl extends GrblListenerAdapter {
     public GrblResponse getResponse() {
       return response;
     }
-
   }
 }

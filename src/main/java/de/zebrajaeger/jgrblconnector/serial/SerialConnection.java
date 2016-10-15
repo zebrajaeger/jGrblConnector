@@ -3,7 +3,7 @@ package de.zebrajaeger.jgrblconnector.serial;
 import java.io.IOException;
 
 /**
- * Created by lars on 03.09.2016.
+ * @author Lars Brandt on 03.09.2016.
  */
 public interface SerialConnection {
   void write(byte b) throws IOException;

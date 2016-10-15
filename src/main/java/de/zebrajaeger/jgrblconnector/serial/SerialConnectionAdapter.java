@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by lars on 04.09.2016.
+ * @author Lars Brandt on 04.09.2016.
  */
 public abstract class SerialConnectionAdapter implements SerialConnection {
 

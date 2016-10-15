@@ -1,7 +1,7 @@
 package de.zebrajaeger.jgrblconnector.command;
 
 /**
- * Created by lars on 03.09.2016.
+ * @author Lars Brandt on 03.09.2016.
  */
 public class GrblResponse {
 
