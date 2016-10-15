@@ -19,4 +19,11 @@ public class SimpleGear implements Gear {
   public float driveSideToMotorSide(float driveAngle) {
     return driveAngle * ratio;
   }
+
+  @Override
+  public String toString() {
+    return "SimpleGear{"
+        + "ratio=" + ratio
+        + '}';
+  }
 }

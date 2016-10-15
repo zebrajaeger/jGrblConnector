@@ -11,6 +11,7 @@ import de.zebrajaeger.jgrblconnector.event.GrblStartEvent;
 import de.zebrajaeger.jgrblconnector.event.GrblStartListener;
 import de.zebrajaeger.jgrblconnector.event.GrblStatusEvent;
 import de.zebrajaeger.jgrblconnector.event.GrblStatusListener;
+import de.zebrajaeger.jgrblconnector.gear.GearSet;
 import de.zebrajaeger.jgrblconnector.serial.SerialConnection;
 import de.zebrajaeger.jgrblconnector.serial.SerialReceiveListener;
 
@@ -31,6 +32,8 @@ public class GrblCore implements SerialReceiveListener {
   private static final Logger LOG = LoggerFactory.getLogger(GrblCore.class);
 
   private SerialConnection con;
+  private GearSet gearSet = GearSet.NOGEAR;
+
   private ReceiveStatus status = ReceiveStatus.STREAM;
   private StringBuffer statusBuffer = null;
   private StringBuffer infoBuffer = null;
@@ -107,6 +110,14 @@ public class GrblCore implements SerialReceiveListener {
 
   public void removeInfoListener(GrblInfoListener l) {
     infoListeners.remove(l);
+  }
+
+  public GearSet getGearSet() {
+    return gearSet;
+  }
+
+  public void setGearSet(GearSet gearSet) {
+    this.gearSet = gearSet;
   }
 
   /**
@@ -252,9 +263,12 @@ public class GrblCore implements SerialReceiveListener {
   }
 
   private void handleStatus(String line) {
-    GrblStatusEvent s = GrblStatusEvent.of(line);
+    GrblStatusEvent e = GrblStatusEvent.Builder
+        .of(line)
+        .gearSet(gearSet)
+        .build();
     for (GrblStatusListener l : statusListeners) {
-      l.grblStatus(s);
+      l.grblStatus(e);
     }
   }
 

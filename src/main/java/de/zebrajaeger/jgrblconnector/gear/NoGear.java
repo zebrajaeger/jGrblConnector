@@ -15,4 +15,9 @@ public class NoGear implements Gear {
   public float driveSideToMotorSide(float driveAngle) {
     return driveAngle;
   }
+
+  @Override
+  public String toString() {
+    return "NoGear{}";
+  }
 }

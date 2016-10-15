@@ -6,8 +6,7 @@ import de.zebrajaeger.jgrblconnector.command.GrblResponse;
 import de.zebrajaeger.jgrblconnector.event.GrblListener;
 import de.zebrajaeger.jgrblconnector.event.GrblListenerAdapter;
 import de.zebrajaeger.jgrblconnector.event.GrblStatusEvent;
-import de.zebrajaeger.jgrblconnector.gear.Gear;
-import de.zebrajaeger.jgrblconnector.gear.NoGear;
+import de.zebrajaeger.jgrblconnector.gear.GearSet;
 import de.zebrajaeger.jgrblconnector.serial.SerialConnection;
 
 import java.io.IOException;
@@ -30,8 +29,6 @@ public class Grbl extends GrblListenerAdapter {
   private Object statusLock = new Object();
   @Nullable
   private GrblStatusEvent lastStatus;
-  @Nonnull
-  private Gear gear = NoGear.INSTANCE;
 
   public Grbl(SerialConnection con, long timeout) {
     this.core = new GrblCore(con);
@@ -47,28 +44,19 @@ public class Grbl extends GrblListenerAdapter {
     core.removeListener(l);
   }
 
-  @Nonnull
-  public Gear getGear() {
-    return gear;
-  }
-
-  public void setGear(@Nonnull Gear gear) {
-    this.gear = gear;
-  }
-
   public GrblResponse moveXRelativeBlocking(float x) throws InterruptedException, IOException {
-    return sendCommandBlocking("G91 X" + floatToString(gear.driveSideToMotorSide(x)));
+    return sendCommandBlocking("G91 X" + floatToString(core.getGearSet().getXGear().driveSideToMotorSide(x)));
   }
 
   public GrblResponse moveYRelativeBlocking(float y) throws InterruptedException, IOException {
-    return sendCommandBlocking("G91 Y" + floatToString(gear.driveSideToMotorSide(y)));
+    return sendCommandBlocking("G91 Y" + floatToString(core.getGearSet().getYGear().driveSideToMotorSide(y)));
   }
 
   public GrblResponse moveXYRelativeBlocking(float x, float y) throws InterruptedException, IOException {
     //System.out.println("## " + floatToString(x));
     return sendCommandBlocking("G91 "
-        + " X" + floatToString(gear.driveSideToMotorSide(x))
-        + " Y" + floatToString(gear.driveSideToMotorSide(y)));
+        + " X" + floatToString(core.getGearSet().getXGear().driveSideToMotorSide(x))
+        + " Y" + floatToString(core.getGearSet().getYGear().driveSideToMotorSide(y)));
   }
 
   /**
@@ -119,6 +107,14 @@ public class Grbl extends GrblListenerAdapter {
     }
 
     return callback.getResponse();
+  }
+
+  public void setGearSet(GearSet gearSet) {
+    core.setGearSet(gearSet);
+  }
+
+  public GearSet getGearSet() {
+    return core.getGearSet();
   }
 
   public String floatToString(float f) {
